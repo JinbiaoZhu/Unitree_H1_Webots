@@ -1,0 +1,2014 @@
+#VRML_SIM R2023b utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is a proto file for Webots for the H1
+# Extracted from: /home/isaacgym/unitree_ros/robots/h1_description/urdf/h1_with_hand.urdf
+
+PROTO H1 [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 1 0
+  field  SFString    name            "H1"  # Is `Robot.name`.
+  field  SFString    controller      "void" # Is `Robot.controller`.
+  field  MFString    controllerArgs  []     # Is `Robot.controllerArgs`.
+  field  SFString    customData      ""     # Is `Robot.customData`.
+  field  SFBool      supervisor      FALSE  # Is `Robot.supervisor`.
+  field  SFBool      synchronization TRUE   # Is `Robot.synchronization`.
+  field  SFBool      selfCollision   FALSE  # Is `Robot.selfCollision`.
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    children [
+      DEF pelvis_visual CadShape {
+        url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/pelvis.dae"
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 0.000000 1.000000
+          anchor 0.000000 0.087500 -0.174200
+        }
+        device [
+          RotationalMotor {
+            name "left_hip_yaw_joint"
+            maxVelocity 23.0
+            minPosition -0.43
+            maxPosition 0.43
+            maxTorque 200.0
+          }
+          PositionSensor {
+            name "left_hip_yaw_joint_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.000000 0.087500 -0.174200
+          children [
+            DEF left_hip_yaw_link_visual CadShape {
+              url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/left_hip_yaw_link.dae"
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                anchor 0.039468 0.000000 0.000000
+              }
+              device [
+                RotationalMotor {
+                  name "left_hip_roll_joint"
+                  maxVelocity 23.0
+                  minPosition -0.43
+                  maxPosition 0.43
+                  maxTorque 200.0
+                }
+                PositionSensor {
+                  name "left_hip_roll_joint_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation 0.039468 0.000000 0.000000
+                children [
+                  DEF left_hip_roll_link_visual CadShape {
+                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/left_hip_roll_link.dae"
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      axis 0.000000 1.000000 0.000000
+                      anchor 0.000000 0.115360 0.000000
+                    }
+                    device [
+                      RotationalMotor {
+                        name "left_hip_pitch_joint"
+                        maxVelocity 23.0
+                        minPosition -3.14
+                        maxPosition 2.53
+                        maxTorque 200.0
+                      }
+                      PositionSensor {
+                        name "left_hip_pitch_joint_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0.000000 0.115360 0.000000
+                      children [
+                        DEF left_hip_pitch_link_visual CadShape {
+                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/left_hip_pitch_link.dae"
+                        }
+                        HingeJoint {
+                          jointParameters HingeJointParameters {
+                            axis 0.000000 1.000000 0.000000
+                            anchor 0.000000 0.000000 -0.400000
+                          }
+                          device [
+                            RotationalMotor {
+                              name "left_knee_joint"
+                              maxVelocity 14.0
+                              minPosition -0.26
+                              maxPosition 2.05
+                              maxTorque 300.0
+                            }
+                            PositionSensor {
+                              name "left_knee_joint_sensor"
+                            }
+                          ]
+                          endPoint Solid {
+                            translation 0.000000 0.000000 -0.400000
+                            children [
+                              DEF left_knee_link_visual CadShape {
+                                url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/left_knee_link.dae"
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis 0.000000 1.000000 0.000000
+                                  anchor 0.000000 0.000000 -0.400000
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "left_ankle_joint"
+                                    maxVelocity 9.0
+                                    minPosition -0.87
+                                    maxPosition 0.52
+                                    maxTorque 40.0
+                                  }
+                                  PositionSensor {
+                                    name "left_ankle_joint_sensor"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0.000000 0.000000 -0.400000
+                                  children [
+                                    DEF left_ankle_link_visual CadShape {
+                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/left_ankle_link.dae"
+                                    }
+                                  ]
+                                  name "left_ankle_link"
+                                  boundingObject Pose {
+                                    translation 0.050000 0.000000 -0.050000
+                                    children [
+                                      Box {
+                                         size 0.280000 0.030000 0.024000
+                                      }
+                                    ]
+                                  }
+                                  physics Physics {
+                                    density -1
+                                    mass 0.474000
+                                    centerOfMass [ 0.042575 -0.000001 -0.044672 ]
+                                    inertiaMatrix [
+                                      1.596680e-04 2.900286e-03 2.805438e-03
+                                      -5.000000e-09 1.410630e-04 1.400000e-08
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                            name "left_knee_link"
+                            boundingObject Pose {
+                              translation 0.000000 0.000000 -0.200000
+                              children [
+                                Cylinder {
+                                  radius 0.05
+                                  height 0.2
+                                }
+                              ]
+                            }
+                            physics Physics {
+                              density -1
+                              mass 1.721000
+                              centerOfMass [ -0.001360 -0.005120 -0.138400 ]
+                              inertiaMatrix [
+                                1.220500e-02 1.250900e-02 2.062900e-03
+                                -6.843100e-05 1.086200e-03 2.254900e-04
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                      name "left_hip_pitch_link"
+                      boundingObject Pose {
+                        translation 0.000000 0.000000 -0.200000
+                        children [
+                          Cylinder {
+                            radius 0.05
+                            height 0.2
+                          }
+                        ]
+                      }
+                      physics Physics {
+                        density -1
+                        mass 4.152000
+                        centerOfMass [ 0.007460 -0.023460 -0.081930 ]
+                        inertiaMatrix [
+                          8.261800e-02 8.157900e-02 6.008100e-03
+                          -6.665400e-04 4.072500e-03 7.202400e-03
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "left_hip_roll_link"
+                boundingObject Pose {
+                  translation 0.000000 0.060000 0.000000
+                  rotation 1.000000 0.000000 0.000000 1.570796
+                  children [
+                    Cylinder {
+                      radius 0.02
+                      height 0.01
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 2.232000
+                  centerOfMass [ -0.005800 -0.003190 -0.000090 ]
+                  inertiaMatrix [
+                    2.060300e-03 2.248200e-03 2.432300e-03
+                    3.211500e-05 2.878000e-06 -7.813000e-06
+                  ]
+                }
+              }
+            }
+          ]
+          name "left_hip_yaw_link"
+          boundingObject Pose {
+            translation 0.020000 0.000000 0.000000
+            rotation 0.000000 1.000000 0.000000 1.570796
+            children [
+              Cylinder {
+                radius 0.01
+                height 0.02
+              }
+            ]
+          }
+          physics Physics {
+            density -1
+            mass 2.244000
+            centerOfMass [ -0.049230 0.000100 0.007200 ]
+            inertiaMatrix [
+              2.573100e-03 3.044400e-03 2.288300e-03
+              9.159000e-06 -5.194800e-04 1.949000e-06
+            ]
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 0.000000 1.000000
+          anchor 0.000000 -0.087500 -0.174200
+        }
+        device [
+          RotationalMotor {
+            name "right_hip_yaw_joint"
+            maxVelocity 23.0
+            minPosition -0.43
+            maxPosition 0.43
+            maxTorque 200.0
+          }
+          PositionSensor {
+            name "right_hip_yaw_joint_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.000000 -0.087500 -0.174200
+          children [
+            DEF right_hip_yaw_link_visual CadShape {
+              url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/right_hip_yaw_link.dae"
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                anchor 0.039468 0.000000 0.000000
+              }
+              device [
+                RotationalMotor {
+                  name "right_hip_roll_joint"
+                  maxVelocity 23.0
+                  minPosition -0.43
+                  maxPosition 0.43
+                  maxTorque 200.0
+                }
+                PositionSensor {
+                  name "right_hip_roll_joint_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation 0.039468 0.000000 0.000000
+                children [
+                  DEF right_hip_roll_link_visual CadShape {
+                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/right_hip_roll_link.dae"
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      axis 0.000000 1.000000 0.000000
+                      anchor 0.000000 -0.115360 0.000000
+                    }
+                    device [
+                      RotationalMotor {
+                        name "right_hip_pitch_joint"
+                        maxVelocity 23.0
+                        minPosition -3.14
+                        maxPosition 2.53
+                        maxTorque 200.0
+                      }
+                      PositionSensor {
+                        name "right_hip_pitch_joint_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0.000000 -0.115360 0.000000
+                      children [
+                        DEF right_hip_pitch_link_visual CadShape {
+                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/right_hip_pitch_link.dae"
+                        }
+                        HingeJoint {
+                          jointParameters HingeJointParameters {
+                            axis 0.000000 1.000000 0.000000
+                            anchor 0.000000 0.000000 -0.400000
+                          }
+                          device [
+                            RotationalMotor {
+                              name "right_knee_joint"
+                              maxVelocity 14.0
+                              minPosition -0.26
+                              maxPosition 2.05
+                              maxTorque 300.0
+                            }
+                            PositionSensor {
+                              name "right_knee_joint_sensor"
+                            }
+                          ]
+                          endPoint Solid {
+                            translation 0.000000 0.000000 -0.400000
+                            children [
+                              DEF right_knee_link_visual CadShape {
+                                url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/right_knee_link.dae"
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis 0.000000 1.000000 0.000000
+                                  anchor 0.000000 0.000000 -0.400000
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "right_ankle_joint"
+                                    maxVelocity 9.0
+                                    minPosition -0.87
+                                    maxPosition 0.52
+                                    maxTorque 40.0
+                                  }
+                                  PositionSensor {
+                                    name "right_ankle_joint_sensor"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0.000000 0.000000 -0.400000
+                                  children [
+                                    DEF right_ankle_link_visual CadShape {
+                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/right_ankle_link.dae"
+                                    }
+                                  ]
+                                  name "right_ankle_link"
+                                  boundingObject Pose {
+                                    translation 0.050000 0.000000 -0.050000
+                                    children [
+                                      Box {
+                                         size 0.280000 0.030000 0.024000
+                                      }
+                                    ]
+                                  }
+                                  physics Physics {
+                                    density -1
+                                    mass 0.474000
+                                    centerOfMass [ 0.042575 0.000001 -0.044672 ]
+                                    inertiaMatrix [
+                                      1.596680e-04 2.900286e-03 2.805438e-03
+                                      5.000000e-09 1.410630e-04 -1.400000e-08
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                            name "right_knee_link"
+                            boundingObject Pose {
+                              translation 0.000000 0.000000 -0.200000
+                              children [
+                                Cylinder {
+                                  radius 0.05
+                                  height 0.2
+                                }
+                              ]
+                            }
+                            physics Physics {
+                              density -1
+                              mass 1.721000
+                              centerOfMass [ -0.001360 0.005120 -0.138400 ]
+                              inertiaMatrix [
+                                1.220500e-02 1.250900e-02 2.062900e-03
+                                6.843100e-05 1.086200e-03 -2.254900e-04
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                      name "right_hip_pitch_link"
+                      boundingObject Pose {
+                        translation 0.000000 0.000000 -0.200000
+                        children [
+                          Cylinder {
+                            radius 0.05
+                            height 0.2
+                          }
+                        ]
+                      }
+                      physics Physics {
+                        density -1
+                        mass 4.152000
+                        centerOfMass [ 0.007460 0.023460 -0.081930 ]
+                        inertiaMatrix [
+                          8.261800e-02 8.157900e-02 6.008100e-03
+                          6.665400e-04 4.072500e-03 -7.202400e-03
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "right_hip_roll_link"
+                boundingObject Pose {
+                  translation 0.000000 -0.060000 0.000000
+                  rotation 1.000000 0.000000 0.000000 1.570796
+                  children [
+                    Cylinder {
+                      radius 0.02
+                      height 0.01
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 2.232000
+                  centerOfMass [ -0.005800 0.003190 -0.000090 ]
+                  inertiaMatrix [
+                    2.060300e-03 2.248200e-03 2.432300e-03
+                    -3.211500e-05 2.878000e-06 7.813000e-06
+                  ]
+                }
+              }
+            }
+          ]
+          name "right_hip_yaw_link"
+          boundingObject Pose {
+            translation 0.020000 0.000000 0.000000
+            rotation 0.000000 1.000000 0.000000 1.570796
+            children [
+              Cylinder {
+                radius 0.01
+                height 0.02
+              }
+            ]
+          }
+          physics Physics {
+            density -1
+            mass 2.244000
+            centerOfMass [ -0.049230 -0.000100 0.007200 ]
+            inertiaMatrix [
+              2.573100e-03 3.044400e-03 2.288300e-03
+              -9.159000e-06 -5.194800e-04 -1.949000e-06
+            ]
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 0.000000 1.000000
+        }
+        device [
+          RotationalMotor {
+            name "torso_joint"
+            maxVelocity 23.0
+            minPosition -2.35
+            maxPosition 2.35
+            maxTorque 200.0
+          }
+          PositionSensor {
+            name "torso_joint_sensor"
+          }
+        ]
+        endPoint Solid {
+          children [
+            DEF torso_link_visual CadShape {
+              url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/torso_link.dae"
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis 0.000000 0.906309 0.422616
+                anchor 0.005500 0.155350 0.429990
+              }
+              device [
+                RotationalMotor {
+                  name "left_shoulder_pitch_joint"
+                  maxVelocity 9.0
+                  minPosition -2.87
+                  maxPosition 2.87
+                  maxTorque 40.0
+                }
+                PositionSensor {
+                  name "left_shoulder_pitch_joint_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation 0.005500 0.155350 0.429990
+                rotation 1.000000 0.000000 0.000000 0.436330
+                children [
+                  DEF left_shoulder_pitch_link_visual CadShape {
+                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/left_shoulder_pitch_link.dae"
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      anchor -0.005500 0.056500 -0.016500
+                    }
+                    device [
+                      RotationalMotor {
+                        name "left_shoulder_roll_joint"
+                        maxVelocity 9.0
+                        minPosition -0.34
+                        maxPosition 3.11
+                        maxTorque 40.0
+                      }
+                      PositionSensor {
+                        name "left_shoulder_roll_joint_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation -0.005500 0.056500 -0.016500
+                      rotation -1.000000 0.000000 0.000000 0.436330
+                      children [
+                        DEF left_shoulder_roll_link_visual CadShape {
+                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/left_shoulder_roll_link.dae"
+                        }
+                        HingeJoint {
+                          jointParameters HingeJointParameters {
+                            axis 0.000000 0.000000 1.000000
+                            anchor 0.000000 0.000000 -0.134300
+                          }
+                          device [
+                            RotationalMotor {
+                              name "left_shoulder_yaw_joint"
+                              maxVelocity 20.0
+                              minPosition -1.3
+                              maxPosition 4.45
+                              maxTorque 18.0
+                            }
+                            PositionSensor {
+                              name "left_shoulder_yaw_joint_sensor"
+                            }
+                          ]
+                          endPoint Solid {
+                            translation 0.000000 0.000000 -0.134300
+                            children [
+                              DEF left_shoulder_yaw_link_visual CadShape {
+                                url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/left_shoulder_yaw_link.dae"
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis 0.000000 1.000000 0.000000
+                                  anchor 0.018500 0.000000 -0.198000
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "left_elbow_joint"
+                                    maxVelocity 20.0
+                                    minPosition -1.25
+                                    maxPosition 2.61
+                                    maxTorque 18.0
+                                  }
+                                  PositionSensor {
+                                    name "left_elbow_joint_sensor"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0.018500 0.000000 -0.198000
+                                  children [
+                                    DEF left_elbow_link_visual CadShape {
+                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/left_elbow_link.dae"
+                                    }
+                                    HingeJoint {
+                                      jointParameters HingeJointParameters {
+                                        anchor 0.260500 0.000000 -0.018500
+                                      }
+                                      device [
+                                        RotationalMotor {
+                                          name "left_hand_joint"
+                                          maxVelocity 12.0
+                                          minPosition -3.0543261909900767
+                                          maxPosition 3.0543261909900767
+                                          maxTorque 6.0
+                                        }
+                                        PositionSensor {
+                                          name "left_hand_joint_sensor"
+                                        }
+                                      ]
+                                      endPoint Solid {
+                                        translation 0.260500 0.000000 -0.018500
+                                        children [
+                                          DEF left_hand_link_visual CadShape {
+                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/left_hand_link.dae"
+                                          }
+                                          Solid {
+                                            translation 0.003000 0.000000 0.000000
+                                            rotation 0.000000 0.000000 1.000000 1.570796
+                                            children [
+                                              DEF L_hand_base_link_visual CadShape {
+                                                url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/L_hand_base_link.dae"
+                                              }
+                                              HingeJoint {
+                                                jointParameters HingeJointParameters {
+                                                  axis 0.000004 -1.000000 0.000000
+                                                  anchor -0.016960 -0.069100 0.020450
+                                                }
+                                                device [
+                                                  RotationalMotor {
+                                                    name "L_thumb_proximal_yaw_joint"
+                                                    maxVelocity 0.5
+                                                    minPosition -0.1
+                                                    maxPosition 1.3
+                                                    maxTorque 1.0
+                                                  }
+                                                  PositionSensor {
+                                                    name "L_thumb_proximal_yaw_joint_sensor"
+                                                  }
+                                                ]
+                                                endPoint Solid {
+                                                  translation -0.016960 -0.069100 0.020450
+                                                  rotation 0.577350 -0.577350 0.577352 2.094399
+                                                  children [
+                                                    DEF Link11_L_visual CadShape {
+                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link11_L.dae"
+                                                    }
+                                                    HingeJoint {
+                                                      jointParameters HingeJointParameters {
+                                                        axis 0.168581 -0.985688 0.000004
+                                                        anchor 0.009987 0.009824 -0.008900
+                                                      }
+                                                      device [
+                                                        RotationalMotor {
+                                                          name "L_thumb_proximal_pitch_joint"
+                                                          maxVelocity 0.5
+                                                          minPosition -0.1
+                                                          maxPosition 0.6
+                                                          maxTorque 1.0
+                                                        }
+                                                        PositionSensor {
+                                                          name "L_thumb_proximal_pitch_joint_sensor"
+                                                        }
+                                                      ]
+                                                      endPoint Solid {
+                                                        translation 0.009987 0.009824 -0.008900
+                                                        rotation -0.992869 -0.084293 0.084292 1.577956
+                                                        children [
+                                                          DEF Link12_L_visual CadShape {
+                                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link12_L.dae"
+                                                          }
+                                                          HingeJoint {
+                                                            jointParameters HingeJointParameters {
+                                                              axis 0.000000 0.000000 -1.000000
+                                                              anchor 0.044070 -0.034553 -0.000800
+                                                            }
+                                                            device [
+                                                              RotationalMotor {
+                                                                name "L_thumb_intermediate_joint"
+                                                                maxVelocity 0.5
+                                                                maxPosition 0.8
+                                                                maxTorque 1.0
+                                                              }
+                                                              PositionSensor {
+                                                                name "L_thumb_intermediate_joint_sensor"
+                                                              }
+                                                            ]
+                                                            endPoint Solid {
+                                                              translation 0.044070 -0.034553 -0.000800
+                                                              children [
+                                                                DEF Link13_L_visual CadShape {
+                                                                  url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link13_L.dae"
+                                                                }
+                                                                HingeJoint {
+                                                                  jointParameters HingeJointParameters {
+                                                                    axis 0.000000 0.000000 -1.000000
+                                                                    anchor 0.020248 -0.010156 -0.001200
+                                                                  }
+                                                                  device [
+                                                                    RotationalMotor {
+                                                                      name "L_thumb_distal_joint"
+                                                                      maxVelocity 0.5
+                                                                      maxPosition 1.2
+                                                                      maxTorque 1.0
+                                                                    }
+                                                                    PositionSensor {
+                                                                      name "L_thumb_distal_joint_sensor"
+                                                                    }
+                                                                  ]
+                                                                  endPoint Solid {
+                                                                    translation 0.020248 -0.010156 -0.001200
+                                                                    children [
+                                                                      DEF Link14_L_visual CadShape {
+                                                                        url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link14_L.dae"
+                                                                      }
+                                                                    ]
+                                                                    name "L_thumb_distal"
+                                                                    boundingObject DEF Link14_L Mesh {
+                                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link14_L.STL"
+                                                                    }
+                                                                    physics Physics {
+                                                                      density -1
+                                                                      mass 0.003344
+                                                                      centerOfMass [ 0.009289 -0.004953 -0.006003 ]
+                                                                      inertiaMatrix [
+                                                                        1.363200e-07 1.405200e-07 2.002600e-07
+                                                                        5.678700e-08 -9.193900e-11 1.214500e-10
+                                                                      ]
+                                                                    }
+                                                                  }
+                                                                }
+                                                              ]
+                                                              name "L_thumb_intermediate"
+                                                              boundingObject DEF Link13_L Mesh {
+                                                                url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link13_L.STL"
+                                                              }
+                                                              physics Physics {
+                                                                density -1
+                                                                mass 0.003784
+                                                                centerOfMass [ 0.009553 0.001628 -0.007200 ]
+                                                                inertiaMatrix [
+                                                                  3.698100e-07 3.239500e-07 4.653200e-07
+                                                                  9.860300e-08 -2.817300e-12 -2.802800e-12
+                                                                ]
+                                                              }
+                                                            }
+                                                          }
+                                                        ]
+                                                        name "L_thumb_proximal"
+                                                        boundingObject DEF Link12_L Mesh {
+                                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link12_L.STL"
+                                                        }
+                                                        physics Physics {
+                                                          density -1
+                                                          mass 0.006610
+                                                          centerOfMass [ 0.021936 -0.012790 -0.008039 ]
+                                                          inertiaMatrix [
+                                                            1.569300e-06 1.735600e-06 2.787000e-06
+                                                            7.833900e-07 8.595900e-10 1.037800e-09
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                  name "L_thumb_proximal_base"
+                                                  boundingObject DEF Link11_L Mesh {
+                                                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link11_L.STL"
+                                                  }
+                                                  physics Physics {
+                                                    density -1
+                                                    mass 0.001887
+                                                    centerOfMass [ 0.004882 0.000388 -0.007220 ]
+                                                    inertiaMatrix [
+                                                      5.515800e-08 8.216400e-08 6.743400e-08
+                                                      -1.180300e-08 -4.674300e-09 -1.352100e-09
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                              HingeJoint {
+                                                jointParameters HingeJointParameters {
+                                                  axis 0.000000 -0.034900 -0.999391
+                                                  anchor 0.000285 -0.136530 0.032268
+                                                }
+                                                device [
+                                                  RotationalMotor {
+                                                    name "L_index_proximal_joint"
+                                                    maxVelocity 0.5
+                                                    maxPosition 1.7
+                                                    maxTorque 1.0
+                                                  }
+                                                  PositionSensor {
+                                                    name "L_index_proximal_joint_sensor"
+                                                  }
+                                                ]
+                                                endPoint Solid {
+                                                  translation 0.000285 -0.136530 0.032268
+                                                  rotation -1.000000 0.000000 0.000000 0.034907
+                                                  children [
+                                                    DEF Link15_L_visual CadShape {
+                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link15_L.dae"
+                                                    }
+                                                    HingeJoint {
+                                                      jointParameters HingeJointParameters {
+                                                        axis 0.000000 0.000000 -1.000000
+                                                        anchor -0.002423 -0.032041 -0.001000
+                                                      }
+                                                      device [
+                                                        RotationalMotor {
+                                                          name "L_index_intermediate_joint"
+                                                          maxVelocity 0.5
+                                                          maxPosition 1.7
+                                                          maxTorque 1.0
+                                                        }
+                                                        PositionSensor {
+                                                          name "L_index_intermediate_joint_sensor"
+                                                        }
+                                                      ]
+                                                      endPoint Solid {
+                                                        translation -0.002423 -0.032041 -0.001000
+                                                        children [
+                                                          DEF Link16_L_visual CadShape {
+                                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link16_L.dae"
+                                                          }
+                                                        ]
+                                                        name "L_index_intermediate"
+                                                        boundingObject DEF Link16_L Mesh {
+                                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link16_L.STL"
+                                                        }
+                                                        physics Physics {
+                                                          density -1
+                                                          mass 0.004568
+                                                          centerOfMass [ 0.002175 -0.019567 -0.005000 ]
+                                                          inertiaMatrix [
+                                                            7.628400e-07 9.430800e-08 7.817600e-07
+                                                            -8.063000e-08 3.679700e-13 1.574300e-13
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                  name "L_index_proximal"
+                                                  boundingObject DEF Link15_L Mesh {
+                                                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link15_L.STL"
+                                                  }
+                                                  physics Physics {
+                                                    density -1
+                                                    mass 0.004241
+                                                    centerOfMass [ 0.001297 -0.011934 -0.006000 ]
+                                                    inertiaMatrix [
+                                                      6.621500e-07 2.116700e-07 6.940200e-07
+                                                      1.844200e-08 1.374600e-12 -1.477300e-11
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                              HingeJoint {
+                                                jointParameters HingeJointParameters {
+                                                  axis 0.000000 0.000000 -1.000000
+                                                  anchor 0.000285 -0.137100 0.012950
+                                                }
+                                                device [
+                                                  RotationalMotor {
+                                                    name "L_middle_proximal_joint"
+                                                    maxVelocity 0.5
+                                                    maxPosition 1.7
+                                                    maxTorque 1.0
+                                                  }
+                                                  PositionSensor {
+                                                    name "L_middle_proximal_joint_sensor"
+                                                  }
+                                                ]
+                                                endPoint Solid {
+                                                  translation 0.000285 -0.137100 0.012950
+                                                  children [
+                                                    DEF Link17_L_visual CadShape {
+                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link17_L.dae"
+                                                    }
+                                                    HingeJoint {
+                                                      jointParameters HingeJointParameters {
+                                                        axis 0.000000 0.000000 -1.000000
+                                                        anchor -0.002423 -0.032041 -0.001000
+                                                      }
+                                                      device [
+                                                        RotationalMotor {
+                                                          name "L_middle_intermediate_joint"
+                                                          maxVelocity 0.5
+                                                          maxPosition 1.7
+                                                          maxTorque 1.0
+                                                        }
+                                                        PositionSensor {
+                                                          name "L_middle_intermediate_joint_sensor"
+                                                        }
+                                                      ]
+                                                      endPoint Solid {
+                                                        translation -0.002423 -0.032041 -0.001000
+                                                        children [
+                                                          DEF Link18_L_visual CadShape {
+                                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link18_L.dae"
+                                                          }
+                                                        ]
+                                                        name "L_middle_intermediate"
+                                                        boundingObject DEF Link18_L Mesh {
+                                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link18_L.STL"
+                                                        }
+                                                        physics Physics {
+                                                          density -1
+                                                          mass 0.005040
+                                                          centerOfMass [ 0.001921 -0.020796 -0.005000 ]
+                                                          inertiaMatrix [
+                                                            9.582300e-07 1.064600e-07 9.838500e-07
+                                                            -1.142500e-07 -2.418600e-12 3.697400e-12
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                  name "L_middle_proximal"
+                                                  boundingObject DEF Link17_L Mesh {
+                                                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link17_L.STL"
+                                                  }
+                                                  physics Physics {
+                                                    density -1
+                                                    mass 0.004241
+                                                    centerOfMass [ 0.001297 -0.011934 -0.006000 ]
+                                                    inertiaMatrix [
+                                                      6.621500e-07 2.116700e-07 6.940200e-07
+                                                      1.844200e-08 1.229900e-12 -1.448400e-11
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                              HingeJoint {
+                                                jointParameters HingeJointParameters {
+                                                  axis 0.000000 0.052336 -0.998630
+                                                  anchor 0.000285 -0.136910 -0.006287
+                                                }
+                                                device [
+                                                  RotationalMotor {
+                                                    name "L_ring_proximal_joint"
+                                                    maxVelocity 0.5
+                                                    maxPosition 1.7
+                                                    maxTorque 1.0
+                                                  }
+                                                  PositionSensor {
+                                                    name "L_ring_proximal_joint_sensor"
+                                                  }
+                                                ]
+                                                endPoint Solid {
+                                                  translation 0.000285 -0.136910 -0.006287
+                                                  rotation 1.000000 0.000000 0.000000 0.052360
+                                                  children [
+                                                    DEF Link19_L_visual CadShape {
+                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link19_L.dae"
+                                                    }
+                                                    HingeJoint {
+                                                      jointParameters HingeJointParameters {
+                                                        axis 0.000000 0.000000 -1.000000
+                                                        anchor -0.002423 -0.032041 -0.001000
+                                                      }
+                                                      device [
+                                                        RotationalMotor {
+                                                          name "L_ring_intermediate_joint"
+                                                          maxVelocity 0.5
+                                                          maxPosition 1.7
+                                                          maxTorque 1.0
+                                                        }
+                                                        PositionSensor {
+                                                          name "L_ring_intermediate_joint_sensor"
+                                                        }
+                                                      ]
+                                                      endPoint Solid {
+                                                        translation -0.002423 -0.032041 -0.001000
+                                                        children [
+                                                          DEF Link20_L_visual CadShape {
+                                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link20_L.dae"
+                                                          }
+                                                        ]
+                                                        name "L_ring_intermediate"
+                                                        boundingObject DEF Link20_L Mesh {
+                                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link20_L.STL"
+                                                        }
+                                                        physics Physics {
+                                                          density -1
+                                                          mass 0.004568
+                                                          centerOfMass [ 0.002175 -0.019567 -0.005000 ]
+                                                          inertiaMatrix [
+                                                            7.628500e-07 9.430800e-08 7.817600e-07
+                                                            -8.063100e-08 3.347200e-14 -4.477300e-13
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                  name "L_ring_proximal"
+                                                  boundingObject DEF Link19_L Mesh {
+                                                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link19_L.STL"
+                                                  }
+                                                  physics Physics {
+                                                    density -1
+                                                    mass 0.004241
+                                                    centerOfMass [ 0.001297 -0.011934 -0.006000 ]
+                                                    inertiaMatrix [
+                                                      6.621500e-07 2.116700e-07 6.940200e-07
+                                                      1.844200e-08 9.605200e-13 -1.412400e-11
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                              HingeJoint {
+                                                jointParameters HingeJointParameters {
+                                                  axis 0.000000 0.104529 -0.994522
+                                                  anchor 0.000285 -0.135710 -0.025488
+                                                }
+                                                device [
+                                                  RotationalMotor {
+                                                    name "L_pinky_proximal_joint"
+                                                    maxVelocity 0.5
+                                                    maxPosition 1.7
+                                                    maxTorque 1.0
+                                                  }
+                                                  PositionSensor {
+                                                    name "L_pinky_proximal_joint_sensor"
+                                                  }
+                                                ]
+                                                endPoint Solid {
+                                                  translation 0.000285 -0.135710 -0.025488
+                                                  rotation 1.000000 0.000000 0.000000 0.104720
+                                                  children [
+                                                    DEF Link21_L_visual CadShape {
+                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link21_L.dae"
+                                                    }
+                                                    HingeJoint {
+                                                      jointParameters HingeJointParameters {
+                                                        axis 0.000000 0.000000 -1.000000
+                                                        anchor -0.002423 -0.032041 -0.001000
+                                                      }
+                                                      device [
+                                                        RotationalMotor {
+                                                          name "L_pinky_intermediate_joint"
+                                                          maxVelocity 0.5
+                                                          maxPosition 1.7
+                                                          maxTorque 1.0
+                                                        }
+                                                        PositionSensor {
+                                                          name "L_pinky_intermediate_joint_sensor"
+                                                        }
+                                                      ]
+                                                      endPoint Solid {
+                                                        translation -0.002423 -0.032041 -0.001000
+                                                        children [
+                                                          DEF Link22_L_visual CadShape {
+                                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link22_L.dae"
+                                                          }
+                                                        ]
+                                                        name "L_pinky_intermediate"
+                                                        boundingObject DEF Link22_L Mesh {
+                                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link22_L.STL"
+                                                        }
+                                                        physics Physics {
+                                                          density -1
+                                                          mass 0.003604
+                                                          centerOfMass [ 0.002479 -0.016208 -0.005000 ]
+                                                          inertiaMatrix [
+                                                            4.392300e-07 7.031500e-08 4.488100e-07
+                                                            -4.135500e-08 1.226300e-12 3.131100e-12
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                  name "L_pinky_proximal"
+                                                  boundingObject DEF Link21_L Mesh {
+                                                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link21_L.STL"
+                                                  }
+                                                  physics Physics {
+                                                    density -1
+                                                    mass 0.004241
+                                                    centerOfMass [ 0.001297 -0.011934 -0.006000 ]
+                                                    inertiaMatrix [
+                                                      6.621500e-07 2.116700e-07 6.940200e-07
+                                                      1.844200e-08 1.027900e-12 -1.427700e-11
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                            name "L_hand_base_link"
+                                            boundingObject DEF L_hand_base_link Mesh {
+                                              url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/L_hand_base_link.STL"
+                                            }
+                                            physics Physics {
+                                              density -1
+                                              mass 0.141430
+                                              centerOfMass [ -0.002551 -0.066047 -0.001936 ]
+                                              inertiaMatrix [
+                                                1.234000e-04 8.383500e-05 7.723100e-05
+                                                2.199500e-06 -1.769400e-06 1.596800e-06
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                        name "left_hand_link"
+                                        boundingObject DEF left_hand_link Mesh {
+                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/left_hand_link.STL"
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 0.014000
+                                          centerOfMass [ 0.003993 -0.000094 0.000000 ]
+                                          inertiaMatrix [
+                                            3.449000e-06 1.917000e-06 1.932000e-06
+                                            6.000000e-09 0.000000e+00 0.000000e+00
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                  name "left_elbow_link"
+                                  boundingObject Pose {
+                                    translation 0.125000 0.000000 0.000000
+                                    rotation 0.000000 1.000000 0.000000 1.570000
+                                    children [
+                                      Cylinder {
+                                        radius 0.03
+                                        height 0.09
+                                      }
+                                    ]
+                                  }
+                                  physics Physics {
+                                    density -1
+                                    mass 0.723000
+                                    centerOfMass [ 0.164862 0.000118 -0.015734 ]
+                                    inertiaMatrix [
+                                      4.963900e-04 6.456355e-03 6.450997e-03
+                                      -3.397100e-05 3.160260e-04 4.929000e-06
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                            name "left_shoulder_yaw_link"
+                            boundingObject Pose {
+                              translation 0.000000 0.000000 -0.110000
+                              children [
+                                Cylinder {
+                                  radius 0.04
+                                  height 0.01
+                                }
+                              ]
+                            }
+                            physics Physics {
+                              density -1
+                              mass 0.839000
+                              centerOfMass [ 0.013650 0.002767 -0.162660 ]
+                              inertiaMatrix [
+                                3.664000e-03 4.078900e-03 6.638300e-04
+                                -1.067100e-05 3.473300e-04 7.021300e-05
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                      name "left_shoulder_roll_link"
+                      boundingObject Pose {
+                        translation 0.000000 0.000000 -0.040000
+                        children [
+                          Cylinder {
+                            radius 0.04
+                            height 0.01
+                          }
+                        ]
+                      }
+                      physics Physics {
+                        density -1
+                        mass 0.793000
+                        centerOfMass [ 0.000679 0.001150 -0.094076 ]
+                        inertiaMatrix [
+                          1.574200e-03 1.697300e-03 1.018300e-03
+                          2.298000e-06 -7.226500e-05 -6.369100e-05
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "left_shoulder_pitch_link"
+                boundingObject Pose {
+                  translation 0.000000 -0.050000 0.000000
+                  rotation 1.000000 0.000000 0.000000 1.570796
+                  children [
+                    Cylinder {
+                      radius 0.03
+                      height 0.04
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 1.033000
+                  centerOfMass [ 0.005045 0.053657 -0.015715 ]
+                  inertiaMatrix [
+                    1.298500e-03 8.727900e-04 9.733800e-04
+                    -1.733300e-05 8.683000e-06 3.965600e-05
+                  ]
+                }
+              }
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis 0.000000 0.906309 -0.422616
+                anchor 0.005500 -0.155350 0.429990
+              }
+              device [
+                RotationalMotor {
+                  name "right_shoulder_pitch_joint"
+                  maxVelocity 9.0
+                  minPosition -2.87
+                  maxPosition 2.87
+                  maxTorque 40.0
+                }
+                PositionSensor {
+                  name "right_shoulder_pitch_joint_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation 0.005500 -0.155350 0.429990
+                rotation -1.000000 0.000000 0.000000 0.436330
+                children [
+                  DEF right_shoulder_pitch_link_visual CadShape {
+                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/right_shoulder_pitch_link.dae"
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      anchor -0.005500 -0.056500 -0.016500
+                    }
+                    device [
+                      RotationalMotor {
+                        name "right_shoulder_roll_joint"
+                        maxVelocity 9.0
+                        minPosition -3.11
+                        maxPosition 0.34
+                        maxTorque 40.0
+                      }
+                      PositionSensor {
+                        name "right_shoulder_roll_joint_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation -0.005500 -0.056500 -0.016500
+                      rotation 1.000000 0.000000 0.000000 0.436330
+                      children [
+                        DEF right_shoulder_roll_link_visual CadShape {
+                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/right_shoulder_roll_link.dae"
+                        }
+                        HingeJoint {
+                          jointParameters HingeJointParameters {
+                            axis 0.000000 0.000000 1.000000
+                            anchor 0.000000 0.000000 -0.134300
+                          }
+                          device [
+                            RotationalMotor {
+                              name "right_shoulder_yaw_joint"
+                              maxVelocity 20.0
+                              minPosition -4.45
+                              maxPosition 1.3
+                              maxTorque 18.0
+                            }
+                            PositionSensor {
+                              name "right_shoulder_yaw_joint_sensor"
+                            }
+                          ]
+                          endPoint Solid {
+                            translation 0.000000 0.000000 -0.134300
+                            children [
+                              DEF right_shoulder_yaw_link_visual CadShape {
+                                url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/right_shoulder_yaw_link.dae"
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis 0.000000 1.000000 0.000000
+                                  anchor 0.018500 0.000000 -0.198000
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "right_elbow_joint"
+                                    maxVelocity 20.0
+                                    minPosition -1.25
+                                    maxPosition 2.61
+                                    maxTorque 18.0
+                                  }
+                                  PositionSensor {
+                                    name "right_elbow_joint_sensor"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0.018500 0.000000 -0.198000
+                                  children [
+                                    DEF right_elbow_link_visual CadShape {
+                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/right_elbow_link.dae"
+                                    }
+                                    HingeJoint {
+                                      jointParameters HingeJointParameters {
+                                        anchor 0.260500 0.000000 -0.018500
+                                      }
+                                      device [
+                                        RotationalMotor {
+                                          name "right_hand_joint"
+                                          maxVelocity 12.0
+                                          minPosition -3.0543261909900767
+                                          maxPosition 3.0543261909900767
+                                          maxTorque 6.0
+                                        }
+                                        PositionSensor {
+                                          name "right_hand_joint_sensor"
+                                        }
+                                      ]
+                                      endPoint Solid {
+                                        translation 0.260500 0.000000 -0.018500
+                                        children [
+                                          DEF right_hand_link_visual CadShape {
+                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/right_hand_link.dae"
+                                          }
+                                          Solid {
+                                            translation 0.003000 0.000000 0.000000
+                                            rotation 0.707107 -0.707107 -0.000000 3.141593
+                                            children [
+                                              DEF R_hand_base_link_visual CadShape {
+                                                url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/R_hand_base_link.dae"
+                                              }
+                                              HingeJoint {
+                                                jointParameters HingeJointParameters {
+                                                  axis -0.000004 1.000000 -0.000000
+                                                  anchor -0.016960 -0.069100 -0.020450
+                                                }
+                                                device [
+                                                  RotationalMotor {
+                                                    name "R_thumb_proximal_yaw_joint"
+                                                    maxVelocity 0.5
+                                                    minPosition -0.1
+                                                    maxPosition 1.3
+                                                    maxTorque 1.0
+                                                  }
+                                                  PositionSensor {
+                                                    name "R_thumb_proximal_yaw_joint_sensor"
+                                                  }
+                                                ]
+                                                endPoint Solid {
+                                                  translation -0.016960 -0.069100 -0.020450
+                                                  rotation 0.577350 -0.577350 0.577352 2.094399
+                                                  children [
+                                                    DEF Link11_R_visual CadShape {
+                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link11_R.dae"
+                                                    }
+                                                    HingeJoint {
+                                                      jointParameters HingeJointParameters {
+                                                        axis 0.279134 0.960252 -0.000004
+                                                        anchor -0.008810 0.010892 -0.009250
+                                                      }
+                                                      device [
+                                                        RotationalMotor {
+                                                          name "R_thumb_proximal_pitch_joint"
+                                                          maxVelocity 0.5
+                                                          minPosition -0.1
+                                                          maxPosition 0.6
+                                                          maxTorque 1.0
+                                                        }
+                                                        PositionSensor {
+                                                          name "R_thumb_proximal_pitch_joint_sensor"
+                                                        }
+                                                      ]
+                                                      endPoint Solid {
+                                                        translation -0.008810 0.010892 -0.009250
+                                                        rotation 0.100184 0.703551 0.703548 2.941892
+                                                        children [
+                                                          DEF Link12_R_visual CadShape {
+                                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link12_R.dae"
+                                                          }
+                                                          HingeJoint {
+                                                            jointParameters HingeJointParameters {
+                                                              axis 0.000000 0.000000 1.000000
+                                                              anchor 0.044070 0.034553 -0.000800
+                                                            }
+                                                            device [
+                                                              RotationalMotor {
+                                                                name "R_thumb_intermediate_joint"
+                                                                maxVelocity 0.5
+                                                                maxPosition 0.8
+                                                                maxTorque 1.0
+                                                              }
+                                                              PositionSensor {
+                                                                name "R_thumb_intermediate_joint_sensor"
+                                                              }
+                                                            ]
+                                                            endPoint Solid {
+                                                              translation 0.044070 0.034553 -0.000800
+                                                              children [
+                                                                DEF Link13_R_visual CadShape {
+                                                                  url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link13_R.dae"
+                                                                }
+                                                                HingeJoint {
+                                                                  jointParameters HingeJointParameters {
+                                                                    axis 0.000000 0.000000 1.000000
+                                                                    anchor 0.020248 0.010156 -0.001200
+                                                                  }
+                                                                  device [
+                                                                    RotationalMotor {
+                                                                      name "R_thumb_distal_joint"
+                                                                      maxVelocity 0.5
+                                                                      maxPosition 1.2
+                                                                      maxTorque 1.0
+                                                                    }
+                                                                    PositionSensor {
+                                                                      name "R_thumb_distal_joint_sensor"
+                                                                    }
+                                                                  ]
+                                                                  endPoint Solid {
+                                                                    translation 0.020248 0.010156 -0.001200
+                                                                    children [
+                                                                      DEF Link14_R_visual CadShape {
+                                                                        url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link14_R.dae"
+                                                                      }
+                                                                    ]
+                                                                    name "R_thumb_distal"
+                                                                    boundingObject DEF Link14_R Mesh {
+                                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link14_R.STL"
+                                                                    }
+                                                                    physics Physics {
+                                                                      density -1
+                                                                      mass 0.003344
+                                                                      centerOfMass [ 0.009289 0.004953 -0.006003 ]
+                                                                      inertiaMatrix [
+                                                                        1.363200e-07 1.405200e-07 2.002600e-07
+                                                                        -5.678800e-08 -9.276400e-11 -1.228300e-10
+                                                                      ]
+                                                                    }
+                                                                  }
+                                                                }
+                                                              ]
+                                                              name "R_thumb_intermediate"
+                                                              boundingObject DEF Link13_R Mesh {
+                                                                url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link13_R.STL"
+                                                              }
+                                                              physics Physics {
+                                                                density -1
+                                                                mass 0.003785
+                                                                centerOfMass [ 0.009554 -0.001628 -0.007200 ]
+                                                                inertiaMatrix [
+                                                                  3.698100e-07 3.239400e-07 4.653100e-07
+                                                                  -9.858100e-08 -4.746900e-12 1.093900e-12
+                                                                ]
+                                                              }
+                                                            }
+                                                          }
+                                                        ]
+                                                        name "R_thumb_proximal"
+                                                        boundingObject DEF Link12_R Mesh {
+                                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link12_R.STL"
+                                                        }
+                                                        physics Physics {
+                                                          density -1
+                                                          mass 0.006607
+                                                          centerOfMass [ 0.021932 0.012785 -0.008039 ]
+                                                          inertiaMatrix [
+                                                            1.568600e-06 1.735300e-06 2.786000e-06
+                                                            -7.829600e-07 8.914300e-10 -1.019100e-09
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                  name "R_thumb_proximal_base"
+                                                  boundingObject DEF Link11_R Mesh {
+                                                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link11_R.STL"
+                                                  }
+                                                  physics Physics {
+                                                    density -1
+                                                    mass 0.001887
+                                                    centerOfMass [ -0.004806 0.000938 -0.007570 ]
+                                                    inertiaMatrix [
+                                                      5.816000e-08 7.916100e-08 6.743300e-08
+                                                      1.453900e-08 4.491000e-09 -1.872700e-09
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                              HingeJoint {
+                                                jointParameters HingeJointParameters {
+                                                  axis 0.000000 0.034886 -0.999391
+                                                  anchor 0.000285 -0.136530 -0.032268
+                                                }
+                                                device [
+                                                  RotationalMotor {
+                                                    name "R_index_proximal_joint"
+                                                    maxVelocity 0.5
+                                                    maxPosition 1.7
+                                                    maxTorque 1.0
+                                                  }
+                                                  PositionSensor {
+                                                    name "R_index_proximal_joint_sensor"
+                                                  }
+                                                ]
+                                                endPoint Solid {
+                                                  translation 0.000285 -0.136530 -0.032268
+                                                  rotation -1.000000 0.000000 0.000000 3.106700
+                                                  children [
+                                                    DEF Link15_R_visual CadShape {
+                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link15_R.dae"
+                                                    }
+                                                    HingeJoint {
+                                                      jointParameters HingeJointParameters {
+                                                        axis 0.000000 0.000000 1.000000
+                                                        anchor -0.002614 0.032026 -0.001000
+                                                      }
+                                                      device [
+                                                        RotationalMotor {
+                                                          name "R_index_intermediate_joint"
+                                                          maxVelocity 0.5
+                                                          maxPosition 1.7
+                                                          maxTorque 1.0
+                                                        }
+                                                        PositionSensor {
+                                                          name "R_index_intermediate_joint_sensor"
+                                                        }
+                                                      ]
+                                                      endPoint Solid {
+                                                        translation -0.002614 0.032026 -0.001000
+                                                        children [
+                                                          DEF Link16_R_visual CadShape {
+                                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link16_R.dae"
+                                                          }
+                                                        ]
+                                                        name "R_index_intermediate"
+                                                        boundingObject DEF Link16_R Mesh {
+                                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link16_R.STL"
+                                                        }
+                                                        physics Physics {
+                                                          density -1
+                                                          mass 0.004568
+                                                          centerOfMass [ 0.001970 0.019589 -0.005000 ]
+                                                          inertiaMatrix [
+                                                            7.611100e-07 9.607600e-08 7.817900e-07
+                                                            8.763700e-08 -3.775100e-13 9.944400e-13
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                  name "R_index_proximal"
+                                                  boundingObject DEF Link15_R Mesh {
+                                                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link15_R.STL"
+                                                  }
+                                                  physics Physics {
+                                                    density -1
+                                                    mass 0.004240
+                                                    centerOfMass [ 0.001226 0.011942 -0.006000 ]
+                                                    inertiaMatrix [
+                                                      6.623200e-07 2.114600e-07 6.939800e-07
+                                                      -1.577500e-08 1.851500e-12 -5.082800e-12
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                              HingeJoint {
+                                                jointParameters HingeJointParameters {
+                                                  axis 0.000000 -0.000007 -1.000000
+                                                  anchor 0.000285 -0.137100 -0.012950
+                                                }
+                                                device [
+                                                  RotationalMotor {
+                                                    name "R_middle_proximal_joint"
+                                                    maxVelocity 0.5
+                                                    maxPosition 1.7
+                                                    maxTorque 1.0
+                                                  }
+                                                  PositionSensor {
+                                                    name "R_middle_proximal_joint_sensor"
+                                                  }
+                                                ]
+                                                endPoint Solid {
+                                                  translation 0.000285 -0.137100 -0.012950
+                                                  rotation -1.000000 -0.000000 0.000000 3.141600
+                                                  children [
+                                                    DEF Link17_R_visual CadShape {
+                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link17_R.dae"
+                                                    }
+                                                    HingeJoint {
+                                                      jointParameters HingeJointParameters {
+                                                        axis 0.000000 0.000000 1.000000
+                                                        anchor -0.002423 0.032041 -0.001000
+                                                      }
+                                                      device [
+                                                        RotationalMotor {
+                                                          name "R_middle_intermediate_joint"
+                                                          maxVelocity 0.5
+                                                          maxPosition 1.7
+                                                          maxTorque 1.0
+                                                        }
+                                                        PositionSensor {
+                                                          name "R_middle_intermediate_joint_sensor"
+                                                        }
+                                                      ]
+                                                      endPoint Solid {
+                                                        translation -0.002423 0.032041 -0.001000
+                                                        children [
+                                                          DEF Link18_R_visual CadShape {
+                                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link18_R.dae"
+                                                          }
+                                                        ]
+                                                        name "R_middle_intermediate"
+                                                        boundingObject DEF Link18_R Mesh {
+                                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link18_R.STL"
+                                                        }
+                                                        physics Physics {
+                                                          density -1
+                                                          mass 0.005040
+                                                          centerOfMass [ 0.001921 0.020796 -0.005000 ]
+                                                          inertiaMatrix [
+                                                            9.582200e-07 1.064600e-07 9.838400e-07
+                                                            1.142500e-07 -2.479100e-12 5.917300e-12
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                  name "R_middle_proximal"
+                                                  boundingObject DEF Link17_R Mesh {
+                                                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link17_R.STL"
+                                                  }
+                                                  physics Physics {
+                                                    density -1
+                                                    mass 0.004240
+                                                    centerOfMass [ 0.001297 0.011934 -0.006000 ]
+                                                    inertiaMatrix [
+                                                      6.621100e-07 2.116700e-07 6.939700e-07
+                                                      -1.846100e-08 1.800200e-12 -6.680800e-12
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                              HingeJoint {
+                                                jointParameters HingeJointParameters {
+                                                  axis 0.000000 -0.052369 -0.998628
+                                                  anchor 0.000285 -0.136910 0.006287
+                                                }
+                                                device [
+                                                  RotationalMotor {
+                                                    name "R_ring_proximal_joint"
+                                                    maxVelocity 0.5
+                                                    maxPosition 1.7
+                                                    maxTorque 1.0
+                                                  }
+                                                  PositionSensor {
+                                                    name "R_ring_proximal_joint_sensor"
+                                                  }
+                                                ]
+                                                endPoint Solid {
+                                                  translation 0.000285 -0.136910 0.006287
+                                                  rotation 1.000000 0.000000 0.000000 3.089200
+                                                  children [
+                                                    DEF Link19_R_visual CadShape {
+                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link19_R.dae"
+                                                    }
+                                                    HingeJoint {
+                                                      jointParameters HingeJointParameters {
+                                                        axis 0.000000 0.000000 1.000000
+                                                        anchor -0.002423 0.032041 -0.001000
+                                                      }
+                                                      device [
+                                                        RotationalMotor {
+                                                          name "R_ring_intermediate_joint"
+                                                          maxVelocity 0.5
+                                                          maxPosition 1.7
+                                                          maxTorque 1.0
+                                                        }
+                                                        PositionSensor {
+                                                          name "R_ring_intermediate_joint_sensor"
+                                                        }
+                                                      ]
+                                                      endPoint Solid {
+                                                        translation -0.002423 0.032041 -0.001000
+                                                        children [
+                                                          DEF Link20_R_visual CadShape {
+                                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link20_R.dae"
+                                                          }
+                                                        ]
+                                                        name "R_ring_intermediate"
+                                                        boundingObject DEF Link20_R Mesh {
+                                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link20_R.STL"
+                                                        }
+                                                        physics Physics {
+                                                          density -1
+                                                          mass 0.004568
+                                                          centerOfMass [ 0.002175 0.019567 -0.005000 ]
+                                                          inertiaMatrix [
+                                                            7.628600e-07 9.431000e-08 7.817700e-07
+                                                            8.063500e-08 -6.156200e-13 5.861900e-13
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                  name "R_ring_proximal"
+                                                  boundingObject DEF Link19_R Mesh {
+                                                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link19_R.STL"
+                                                  }
+                                                  physics Physics {
+                                                    density -1
+                                                    mass 0.004240
+                                                    centerOfMass [ 0.001297 0.011934 -0.006000 ]
+                                                    inertiaMatrix [
+                                                      6.621100e-07 2.116700e-07 6.939700e-07
+                                                      -1.846100e-08 1.579300e-12 -6.686800e-12
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                              HingeJoint {
+                                                jointParameters HingeJointParameters {
+                                                  axis 0.000000 -0.104502 -0.994525
+                                                  anchor 0.000285 -0.135710 0.025488
+                                                }
+                                                device [
+                                                  RotationalMotor {
+                                                    name "R_pinky_proximal_joint"
+                                                    maxVelocity 0.5
+                                                    maxPosition 1.7
+                                                    maxTorque 1.0
+                                                  }
+                                                  PositionSensor {
+                                                    name "R_pinky_proximal_joint_sensor"
+                                                  }
+                                                ]
+                                                endPoint Solid {
+                                                  translation 0.000285 -0.135710 0.025488
+                                                  rotation 1.000000 0.000000 0.000000 3.036900
+                                                  children [
+                                                    DEF Link21_R_visual CadShape {
+                                                      url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link21_R.dae"
+                                                    }
+                                                    HingeJoint {
+                                                      jointParameters HingeJointParameters {
+                                                        axis 0.000000 0.000000 1.000000
+                                                        anchor -0.002423 0.032041 -0.001000
+                                                      }
+                                                      device [
+                                                        RotationalMotor {
+                                                          name "R_pinky_intermediate_joint"
+                                                          maxVelocity 0.5
+                                                          maxPosition 1.7
+                                                          maxTorque 1.0
+                                                        }
+                                                        PositionSensor {
+                                                          name "R_pinky_intermediate_joint_sensor"
+                                                        }
+                                                      ]
+                                                      endPoint Solid {
+                                                        translation -0.002423 0.032041 -0.001000
+                                                        children [
+                                                          DEF Link22_R_visual CadShape {
+                                                            url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link22_R.dae"
+                                                          }
+                                                        ]
+                                                        name "R_pinky_intermediate"
+                                                        boundingObject DEF Link22_R Mesh {
+                                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link22_R.STL"
+                                                        }
+                                                        physics Physics {
+                                                          density -1
+                                                          mass 0.003600
+                                                          centerOfMass [ 0.002475 0.016203 -0.005003 ]
+                                                          inertiaMatrix [
+                                                            4.391300e-07 7.024700e-08 4.486700e-07
+                                                            4.141800e-08 3.716800e-11 5.861300e-11
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                  name "R_pinky_proximal"
+                                                  boundingObject DEF Link21_R Mesh {
+                                                    url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/Link21_R.STL"
+                                                  }
+                                                  physics Physics {
+                                                    density -1
+                                                    mass 0.004240
+                                                    centerOfMass [ 0.001297 0.011934 -0.006000 ]
+                                                    inertiaMatrix [
+                                                      6.621100e-07 2.116700e-07 6.939700e-07
+                                                      -1.846100e-08 1.690700e-12 -6.933400e-12
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                            name "R_hand_base_link"
+                                            boundingObject DEF R_hand_base_link Mesh {
+                                              url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/R_hand_base_link.STL"
+                                            }
+                                            physics Physics {
+                                              density -1
+                                              mass 0.141430
+                                              centerOfMass [ -0.002526 -0.066047 0.001960 ]
+                                              inertiaMatrix [
+                                                1.228100e-04 8.383200e-05 7.666300e-05
+                                                2.171100e-06 1.770900e-06 -1.655100e-06
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                        name "right_hand_link"
+                                        boundingObject DEF right_hand_link Mesh {
+                                          url "/home/isaacgym/unitree_ros/robots/h1_description/meshes/right_hand_link.STL"
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 0.014000
+                                          centerOfMass [ 0.003993 0.000094 0.000000 ]
+                                          inertiaMatrix [
+                                            3.449000e-06 1.917000e-06 1.932000e-06
+                                            -6.000000e-09 0.000000e+00 0.000000e+00
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                  name "right_elbow_link"
+                                  boundingObject Pose {
+                                    translation 0.125000 0.000000 0.000000
+                                    rotation 0.000000 1.000000 0.000000 1.570000
+                                    children [
+                                      Cylinder {
+                                        radius 0.03
+                                        height 0.09
+                                      }
+                                    ]
+                                  }
+                                  physics Physics {
+                                    density -1
+                                    mass 0.723000
+                                    centerOfMass [ 0.164862 -0.000118 -0.015734 ]
+                                    inertiaMatrix [
+                                      4.963900e-04 6.456355e-03 6.450997e-03
+                                      3.397100e-05 3.160260e-04 -4.929000e-06
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                            name "right_shoulder_yaw_link"
+                            boundingObject Pose {
+                              translation 0.000000 0.000000 -0.110000
+                              children [
+                                Cylinder {
+                                  radius 0.04
+                                  height 0.01
+                                }
+                              ]
+                            }
+                            physics Physics {
+                              density -1
+                              mass 0.839000
+                              centerOfMass [ 0.013650 -0.002767 -0.162660 ]
+                              inertiaMatrix [
+                                3.664000e-03 4.078900e-03 6.638300e-04
+                                1.067100e-05 3.473300e-04 -7.021300e-05
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                      name "right_shoulder_roll_link"
+                      boundingObject Pose {
+                        translation 0.000000 0.000000 -0.040000
+                        children [
+                          Cylinder {
+                            radius 0.04
+                            height 0.01
+                          }
+                        ]
+                      }
+                      physics Physics {
+                        density -1
+                        mass 0.793000
+                        centerOfMass [ 0.000679 -0.001150 -0.094076 ]
+                        inertiaMatrix [
+                          1.574200e-03 1.697300e-03 1.018300e-03
+                          -2.298000e-06 -7.226500e-05 6.369100e-05
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "right_shoulder_pitch_link"
+                boundingObject Pose {
+                  translation 0.000000 0.050000 0.000000
+                  rotation -1.000000 0.000000 0.000000 1.570796
+                  children [
+                    Cylinder {
+                      radius 0.03
+                      height 0.04
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 1.033000
+                  centerOfMass [ 0.005045 -0.053657 -0.015715 ]
+                  inertiaMatrix [
+                    1.298500e-03 8.727900e-04 9.733800e-04
+                    1.733300e-05 8.683000e-06 -3.965600e-05
+                  ]
+                }
+              }
+            }
+            Solid {
+              translation 0.108485 0.017500 0.693171
+              rotation -0.685699 0.685701 -0.244196 2.662578
+              children [
+                Shape {
+                  appearance DEF white PBRAppearance {
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry Sphere {
+                    radius 0.001
+                  }
+                }
+              ]
+              name "d435_left_imager_link"
+              boundingObject Sphere {
+                radius 0.001
+              }
+              physics Physics {
+              }
+            }
+            Solid {
+              translation 0.108485 0.032500 0.693171
+              rotation -0.685699 0.685701 -0.244196 2.662578
+              children [
+                Shape {
+                  appearance USE white
+                  geometry Sphere {
+                    radius 0.001
+                  }
+                }
+              ]
+              name "d435_rgb_module_link"
+              boundingObject Sphere {
+                radius 0.001
+              }
+              physics Physics {
+              }
+            }
+            Solid {
+              translation 0.047300 0.000000 0.674929
+              rotation 0.000000 1.000000 0.000000 0.243124
+              children [
+                Shape {
+                  appearance USE white
+                  geometry Sphere {
+                    radius 0.001
+                  }
+                }
+              ]
+              name "mid360_link"
+              boundingObject Sphere {
+                radius 0.001
+              }
+              physics Physics {
+              }
+            }
+          ]
+          name "torso_link"
+          boundingObject Pose {
+            translation 0.000000 0.000000 0.150000
+            children [
+              Box {
+                 size 0.080000 0.160000 0.100000
+              }
+            ]
+          }
+          physics Physics {
+            density -1
+            mass 17.789000
+            centerOfMass [ 0.000489 0.002797 0.204840 ]
+            inertiaMatrix [
+              4.873000e-01 4.096300e-01 1.278500e-01
+              -5.376300e-04 2.027600e-03 -7.458200e-04
+            ]
+          }
+        }
+      }
+      GPS {
+        translation 0 0 0.7
+        name "head"
+        type "satellite"
+      }
+    ]
+    name IS name
+    boundingObject Sphere {
+      radius 0.05
+    }
+    physics Physics {
+      density -1
+      mass 5.390000
+      centerOfMass [ -0.000200 0.000040 -0.045220 ]
+      inertiaMatrix [
+        4.458200e-02 8.246400e-03 4.902100e-02
+        8.703400e-05 -1.989300e-05 4.021000e-06
+      ]
+    }
+  }
+}
