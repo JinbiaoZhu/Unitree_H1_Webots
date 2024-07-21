@@ -20,7 +20,7 @@ def reward_function_v0(state=None, action=None, next_state=None):
     --> 头部距离 1.75m 越远, 获得的奖励就越小
     --> reward = -1 * | next_state的最后一维度 - 1.75米 |
     """
-    return -1 * math.exp(math.fabs(next_state[-1] - 1.75))
+    return -1 * (math.fabs(next_state[-1] - 1.75) ** 2)
 
 
 class UnitreeH1StandingV0(gymnasium.Env):
@@ -89,9 +89,6 @@ class UnitreeH1StandingV0(gymnasium.Env):
             seed: int | None = None,
             options: dict[str, Any] | None = None,
     ) -> ndarray[Any, dtype[Any]]:
-        # 使用 gym.Env 环境基类提供的随机数生成器, 需要调用以下代码以确保 seed 正确
-        super().reset(seed=seed)
-
         # 监视器重启仿真环境
         self.Supervisor.simulationReset()
 
@@ -108,16 +105,15 @@ class UnitreeH1StandingV0(gymnasium.Env):
         # 调用 .get_obs() 方法获取当前关节位置和头部三维位置并返回
         return np.asarray(self.get_obs())
 
+    def seed(self, seed):
+        # 使用 gym.Env 环境基类提供的随机数生成器, 需要调用以下代码以确保 seed 正确
+        super().reset(seed=seed)
+
     def step(
             self, action: ActType
-    ) -> Tuple[List[Any], List[Any], float, bool, Dict[str, int | Any]]:
+    ) -> Tuple[List[Any], float, bool, Dict[str, int | Any]]:
 
-        modified_action = []
         for an_action, jnt_name in zip(action, self.joint_namelist):
-            # 对 an_action 原本是 [-1, 1] 范围进行放缩
-            an_action *= self.metadata["threshold"]
-            # 将放缩完的动作存储至 modified_action 列表中, 用于存放至经验回访池中
-            modified_action.append(an_action)
             # 读取当前 jnt_name 关节的数值
             current = self.joint_infos[jnt_name]["sensor"].getValue()
             # 增量式计算
@@ -131,13 +127,13 @@ class UnitreeH1StandingV0(gymnasium.Env):
         # 更新时间步骤
         self.current_step += 1
         # 获得奖励函数, 这里设置密集奖励函数
-        reward = self.reward_function(None, modified_action, next_obs)
+        reward = self.reward_function(None, None, next_obs)
         # 获取是否自动结束的标志
         done = self.get_done()
         # 获取当前时间步骤相关的信息
         info = self.get_info(reward=reward)
 
-        return modified_action, next_obs, reward, done, info
+        return next_obs, reward, done, info
 
     def render(self) -> RenderFrame | list[RenderFrame] | None:
         """
@@ -272,7 +268,7 @@ if __name__ == "__main__":
         while env.render() != -1:
             action = env.action_space.sample()
 
-            modified_action, next_obs, reward, done, info = env.step(action)
+            next_obs, reward, done, info = env.step(action)
             print(info)
 
             if done:
