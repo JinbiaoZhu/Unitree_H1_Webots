@@ -14,7 +14,7 @@ from base_declaration import DEVICE, DTYPE, EPS, LINEAR
 from buffer import Episode
 from continuous_policy import ContinuousPolicyNormal
 from continuous_critic import ContinuousValueCritic
-from tools import init_weight, discounted_rewards
+from tools import init_weight, discounted_rewards, time_string
 
 
 class PPO:
@@ -114,3 +114,11 @@ class PPO:
             self.critic_optimizer.step()
 
         return actor_loss_total, critic_loss_total
+
+    def save(self, filedir):
+
+        total_filepath = filedir + "actor_" + time_string() + ".pth"
+        print(f"Saving actor model to {total_filepath} ...")
+        torch.save(self.policy, total_filepath)
+        print("Successfully!")
+

@@ -19,8 +19,12 @@ def reward_function_v0(state=None, action=None, next_state=None):
     希望 Unitree H1 的头部机器人施加动作后头部高度会上升且接近于自身高度值(假定是 1.75m )
     --> 头部距离 1.75m 越远, 获得的奖励就越小
     --> reward = -1 * | next_state的最后一维度 - 1.75米 |
+    --> 限幅处理: 头部距离 1.75 的高度已经超过 10 米了, 更远就会影响学习效果
     """
-    return -1 * (math.fabs(next_state[-1] - 1.75) ** 2)
+    initial_reward = -1 * (math.fabs(next_state[-1] - 1.75) ** 2)
+    if initial_reward < -100:
+        initial_reward = -100
+    return initial_reward
 
 
 class UnitreeH1StandingV0(gymnasium.Env):

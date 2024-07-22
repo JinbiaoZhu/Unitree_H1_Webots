@@ -7,7 +7,7 @@ ppo_config = {
     "algo": "PPO",
     "actor_lr": 0.00001,
     "critic_lr": 0.0005,
-    "num_episode": 2000,
+    "num_episode": 3000,
     "num_iteration": 10,
     "gamma": 0.9,
     "lmbda": 0.9,

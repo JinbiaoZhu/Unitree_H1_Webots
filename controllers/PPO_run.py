@@ -77,3 +77,4 @@ if __name__ == '__main__':
                 pbar.update(1)
 
     evaluation.plot_performance()
+    agent.save(ppo_config["model_dir"])
