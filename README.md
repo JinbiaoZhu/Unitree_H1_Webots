@@ -48,15 +48,15 @@
 
 效果表现和损失函数展示:
 
-<img height="200" src="https://github.com/JinbiaoZhu/Unitree_H1_Webots/tree/main/controllers/results/ppo/UnitreeH1_Standing-20240722122807.png" width="200"/>
+![Total Reward Per Episode](https://github.com/JinbiaoZhu/Unitree_H1_Webots/tree/main/controllers/results/ppo/UnitreeH1_Standing-20240722122807.png)
 
 ---
 
-<img height="200" src="https://github.com/JinbiaoZhu/Unitree_H1_Webots/tree/main/controllers/results/ppo/UnitreeH1_Standing-20240722104334.png-loss.png" width="200"/>
+![Loss function Per Episode](https://github.com/JinbiaoZhu/Unitree_H1_Webots/tree/main/controllers/results/ppo/UnitreeH1_Standing-20240722104334.png-loss.png)
 
 ---
 
-<img src="https://github.com/JinbiaoZhu/Unitree_H1_Webots/tree/main/controllers/results/ppo/UnitreeH1_Standing-20240722104334.png-loss.png"/>
+
 
 ### PlaNet
 
