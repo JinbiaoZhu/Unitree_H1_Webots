@@ -16,10 +16,10 @@ if __name__ == '__main__':
     num_episodes = 10
 
     # load policy here
-    policy = torch.load("./ckpts/ppo/actor_20240722134709.pth")
+    policy = torch.load("./ckpts/ppo/actor_20240722185417.pth")
 
     env.record_movie(True, "/media/isaacgym/extend/isaacgym/UnitreeH1_RLTraining/controllers/record/ppo"
-                           "/actor_20240722134709.mp4")
+                           "/actor_20240722185417.mp4")
     for i in range(num_episodes):
 
         state = env.reset()
@@ -38,5 +38,5 @@ if __name__ == '__main__':
                 break
 
     env.record_movie(False, "/media/isaacgym/extend/isaacgym/UnitreeH1_RLTraining/controllers/record/ppo"
-                            "/actor_20240722134709.mp4")
+                            "/actor_20240722185417.mp4")
     env.close()

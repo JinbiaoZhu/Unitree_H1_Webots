@@ -27,6 +27,20 @@ def reward_function_v0(state=None, action=None, next_state=None):
     return initial_reward
 
 
+def reward_function_v1(state=None, action=None, next_state=None):
+    """
+    奖励函数设置: 密集奖励函数
+    注意到强化学习的目标是获得最大的累计奖励, 考虑到本任务的是从地面上站立, 那么头部高度应该会距离地面越来越远
+    --> 直接以头部距离和地面的差值作为奖励函数的自变量; 但是考虑到机器人可能会因为力矩不当而弹出;
+    --> 当高度超过 2 米时, 直接设置奖励值为 0 .
+    """
+    z = next_state[-1]
+    if z >= 2.0:
+        return 0
+    else:
+        return math.exp(2 * next_state[-1])
+
+
 class UnitreeH1StandingV0(gymnasium.Env):
     # 这个元数据字典用于存储类内全局和仿真器连接的超参数
     metadata = {
@@ -83,7 +97,7 @@ class UnitreeH1StandingV0(gymnasium.Env):
         self.action_space = spaces.Box(-1.0, 1.0, (jnt_obs_shape,))
 
         # 获取奖励函数, 从外部获得
-        self.reward_function = reward_function_v0
+        self.reward_function = reward_function_v1
 
         # 初始化每一时刻的步数记录
         self.current_step = 0

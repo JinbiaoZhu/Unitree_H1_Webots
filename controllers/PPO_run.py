@@ -78,3 +78,4 @@ if __name__ == '__main__':
 
     evaluation.plot_performance()
     agent.save(ppo_config["model_dir"])
+    env.close()
