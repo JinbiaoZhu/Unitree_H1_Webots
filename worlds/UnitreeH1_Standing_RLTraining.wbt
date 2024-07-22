@@ -8,8 +8,8 @@ EXTERNPROTO "../protos/H1.proto"
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.1838525092029965 0.020594044683741826 0.9827380832059608 3.06158187758416
-  position 12.7426121526687 0.29849199323925124 5.458249772297857
+  fieldOfView 1
+  position -6 0 1.3
 }
 TexturedBackground {
 }

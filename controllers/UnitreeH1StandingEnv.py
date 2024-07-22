@@ -35,6 +35,7 @@ class UnitreeH1StandingV0(gymnasium.Env):
         "timestep": 1,
         "threshold": math.pi * 2 / 100,
         "fly": 3.0,
+        "mode": "train"
     }
 
     # 初始化在任务中需要用到的关节角度名称
@@ -99,12 +100,19 @@ class UnitreeH1StandingV0(gymnasium.Env):
         # 初始化时间步骤记录
         self.current_step = 0
 
-        # 初始化智能体的行为, 具体在各个电机中赋值运动范围内的随机数
-        for name, properties in self.joint_infos.items():
-            properties["controller"].setPosition(
-                self.np_random.random() * (properties["controller_max"] - properties["controller_min"]) + properties[
-                    "controller_min"])
-            self.Supervisor.step(time_step=self.metadata["timestep"])
+        if self.metadata["mode"] == "train":
+            # 初始化智能体的行为, 具体在各个电机中赋值运动范围内的随机数
+            for name, properties in self.joint_infos.items():
+                properties["controller"].setPosition(
+                    self.np_random.random() * (properties["controller_max"] - properties["controller_min"]) +
+                    properties[
+                        "controller_min"])
+                self.Supervisor.step(time_step=self.metadata["timestep"])
+        if self.metadata["mode"] == "test":
+            # 初始化智能体的行为, 具体在各个电机中赋值 0
+            for name, properties in self.joint_infos.items():
+                properties["controller"].setPosition(0.0)
+                self.Supervisor.step(time_step=self.metadata["timestep"])
 
         # 调用 .get_obs() 方法获取当前关节位置和头部三维位置并返回
         return np.asarray(self.get_obs())
@@ -259,6 +267,20 @@ class UnitreeH1StandingV0(gymnasium.Env):
         else:
             value = value
         return value
+
+    def record_movie(self, isStart: bool, filename: str):
+        """
+        调用 Webots 的 API 记录仿真环境的情况
+        :param isStart: True 表示开始记录; False 表示结束记录
+        """
+        assert self.metadata["mode"] == "test", "Wrong in recording, only available in testing"
+        if isStart:
+            self.Supervisor.movieStartRecording(filename=filename, width=512, height=512, codec=0, quality=100,
+                                                acceleration=1, caption=True)
+            print("Staring recording...")
+        if not isStart:
+            self.Supervisor.movieStopRecording()
+            print("Stopping recording...")
 
 
 if __name__ == "__main__":

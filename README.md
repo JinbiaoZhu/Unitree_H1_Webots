@@ -46,6 +46,18 @@
 
 代码来源: [我自己 2023 年写的](https://github.com/JinbiaoZhu/BasicReinforcementLearning.git) .
 
+效果表现和损失函数展示:
+
+<img height="200" src="./results/ppo/UnitreeH1_Standing-20240722122807.png" width="200"/>
+
+---
+
+<img height="200" src="./results/ppo/UnitreeH1_Standing-20240722104334.png-loss.png" width="200"/>
+
+---
+
+<img src="./results/ppo/UnitreeH1_Standing-20240722104334.png-loss.png"/>
+
 ### PlaNet
 
 待开发
