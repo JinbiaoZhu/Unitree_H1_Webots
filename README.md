@@ -4,17 +4,23 @@
 
 这个项目使用强化学习 (PPO) 训练宇树 H1 机器人实现**在不同姿态作为初始状态下**完成**竖直站立**任务.
 
+### 工作日志
+
+- [2024/07/21] 完成初步的建模、代码编写。
+- [2024/07/22] 调整 `v1` 版本奖励函数。
+- [2024/07/23] 发现使用的是带灵巧手版本的 `.urdf` 文件，复杂的零件会导致 Unitree H1 机器人在仿真器中出现无法预料的错误。因此增加了不带灵巧手版本的 `.urdf` 文件，并配置了对应的 `.proto` 节点以及 `.wbt` 世界文件，并为新的版本设计了 `UnitreeH1StandingV1` 接口。
+
 ## 1. Markov Decision Process
 
-在建模马尔科夫决策过程中, 使用宇树 H1 机器人的 21 个电机关节, 如下表所示.
+在建模马尔科夫决策过程中, 使用宇树 H1 机器人的 21 (无手版本是 19 ) 个电机关节, 如下表所示.
 
-| 躯体部分   | 关节名                     |                           |                          |                   |                   |
-| ---------- | -------------------------- | ------------------------- | ------------------------ | ----------------- | ----------------- |
-| 左下肢部分 | left_hip_yaw_joint         | left_hip_roll_joint       | left_hip_pitch_joint     | left_knee_joint   | left_ankle_joint  |
-| 右下肢部分 | right_hip_yaw_joint        | right_hip_roll_joint      | right_hip_pitch_joint    | right_knee_joint  | right_ankle_joint |
-| 中间部分   | torso_joint                |                           |                          |                   |                   |
-| 左上肢部分 | left_shoulder_pitch_joint  | left_shoulder_roll_joint  | left_shoulder_yaw_joint  | left_elbow_joint  | left_hand_joint   |
-| 右上肢部分 | right_shoulder_pitch_joint | right_shoulder_roll_joint | right_shoulder_yaw_joint | right_elbow_joint | right_hand_joint  |
+| 躯体部分   | 关节名                     |                           |                          |                   |                                                 |
+| ---------- | -------------------------- | ------------------------- | ------------------------ | ----------------- | ----------------------------------------------- |
+| 左下肢部分 | left_hip_yaw_joint         | left_hip_roll_joint       | left_hip_pitch_joint     | left_knee_joint   | left_ankle_joint                                |
+| 右下肢部分 | right_hip_yaw_joint        | right_hip_roll_joint      | right_hip_pitch_joint    | right_knee_joint  | right_ankle_joint                               |
+| 中间部分   | torso_joint                |                           |                          |                   |                                                 |
+| 左上肢部分 | left_shoulder_pitch_joint  | left_shoulder_roll_joint  | left_shoulder_yaw_joint  | left_elbow_joint  | left_hand_joint **(在无手版本中不存在此关节)**  |
+| 右上肢部分 | right_shoulder_pitch_joint | right_shoulder_roll_joint | right_shoulder_yaw_joint | right_elbow_joint | right_hand_joint **(在无手版本中不存在此关节)** |
 
 在建模马尔科夫决策过程中, 使用宇树 H1 机器人 1 个部位实体, 如下表所示.
 
@@ -24,7 +30,7 @@
 
 ### 状态空间
 
-状态空间包括两部分: 上述表格中各个关节的当前时刻角度信息, 各 1 维; 头部传感器的当前时刻 3 维位置信息; 总共 24 维度.
+状态空间包括两部分: 上述表格中各个关节的当前时刻角度信息, 各 1 维; 头部传感器的当前时刻 3 维位置信息; 总共 24 维度 (无手版本是 22 维度) .
 
 ### 动作空间
 
@@ -55,6 +61,8 @@
 ### PPO 算法
 
 代码来源: [我自己 2023 年写的](https://github.com/JinbiaoZhu/BasicReinforcementLearning.git) .
+
+> 注意: 接下来的效果展示可能有误！目前正在调整。
 
 效果表现和损失函数展示:
 
@@ -111,5 +119,5 @@
 12 directories, 15 files
 ```
 
-Webots 默认项目模板是: `controllers` (环境接口、算法实现和指标与模型的保存) , `libraries` , `plugins` , `protos` (用于描述 Webots 中的机器人节点) 和 `worlds` (描述 Webots 中世界) 文件; `basic` (存放宇树原本的 `.urdf` 文件) 和 `README.md` 是我额外加的.
+Webots 默认项目模板是: `controllers` (环境接口、算法实现和指标与模型的保存) , `libraries` , `plugins` , `protos` (用于描述 Webots 中的机器人节点) 和 `worlds` (描述 Webots 中世界) 文件; `basic` (存放宇树原本的 `.urdf` 文件) 和 `README(_en).md` 是我额外加的.
 

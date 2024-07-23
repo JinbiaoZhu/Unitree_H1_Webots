@@ -11,13 +11,14 @@ from PPO_config import ppo_config
 from evaluation import SimpleEvaluate
 from tools import set_seed, print_dict
 
-from UnitreeH1StandingEnv import UnitreeH1StandingV0
+from UnitreeH1StandingEnv import UnitreeH1StandingV0, UnitreeH1StandingV1
 
 if __name__ == '__main__':
 
     print_dict(os.path.basename(__file__), ppo_config)
 
-    env = UnitreeH1StandingV0()
+    # env = UnitreeH1StandingV0()
+    env = UnitreeH1StandingV1()
 
     num_episodes = ppo_config["num_episode"]
     num_iteration = ppo_config["num_iteration"]
@@ -54,7 +55,7 @@ if __name__ == '__main__':
 
                 while env.render() != -1:
                     action, dist = agent.action(state)
-                    next_state, reward, done, _ = env.step(action)
+                    next_state, reward, done, info = env.step(action)
                     agent.store(state, action, reward, next_state, done, dist)
                     state = next_state
                     evaluation.add_single_step_reward(reward)
