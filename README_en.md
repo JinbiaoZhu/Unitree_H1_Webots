@@ -1,5 +1,7 @@
 # Training Unitree H1 standing by reinforcement learning in Webots simulator
 
+[简体中文](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/README.md) | [Engligh (Powered by ChatGPT)](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/README_en.md)
+
 ## 0. Introduction
 
 This project uses reinforcement learning (PPO) to train the **Unitree H1** humanoid robot to accomplish the task of **vertical standing** from **various initial postures**.

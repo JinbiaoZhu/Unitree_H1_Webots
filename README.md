@@ -1,5 +1,7 @@
 # Training Unitree H1 standing by reinforcement learning in Webots simulator
 
+[简体中文](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/README.md) | [Engligh (Powered by ChatGPT)](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/README_en.md)
+
 ## 0. Introduction
 
 这个项目使用强化学习 (PPO) 训练宇树 H1 机器人实现**在不同姿态作为初始状态下**完成**竖直站立**任务.
