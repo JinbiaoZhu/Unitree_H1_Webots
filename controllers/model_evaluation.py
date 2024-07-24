@@ -6,20 +6,21 @@ from torch.distributions.normal import Normal
 
 from base_declaration import DTYPE
 from PPO_config import ppo_config
-from UnitreeH1StandingEnv import UnitreeH1StandingV0
+from UnitreeH1StandingEnv import UnitreeH1StandingV0, UnitreeH1StandingV1
 
 if __name__ == '__main__':
 
-    env = UnitreeH1StandingV0()
+    # env = UnitreeH1StandingV0()
+    env = UnitreeH1StandingV1()
     env.metadata["mode"] = "test"
 
     num_episodes = 10
 
     # load policy here
-    policy = torch.load("./ckpts/ppo/actor_20240722185417.pth")
+    policy = torch.load("./ckpts/ppo/actor_20240724170556.pth")
 
     env.record_movie(True, "/media/isaacgym/extend/isaacgym/UnitreeH1_RLTraining/controllers/record/ppo"
-                           "/actor_20240722185417.mp4")
+                           "/actor_20240724170556.mp4")
     for i in range(num_episodes):
 
         state = env.reset()
@@ -38,5 +39,5 @@ if __name__ == '__main__':
                 break
 
     env.record_movie(False, "/media/isaacgym/extend/isaacgym/UnitreeH1_RLTraining/controllers/record/ppo"
-                            "/actor_20240722185417.mp4")
+                            "/actor_20240724170556.mp4")
     env.close()

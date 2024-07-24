@@ -11,6 +11,7 @@
 - [2024/07/21] 完成初步的建模、代码编写。
 - [2024/07/22] 调整 `v1` 版本奖励函数。
 - [2024/07/23] 发现使用的是带灵巧手版本的 `.urdf` 文件，复杂的零件会导致 Unitree H1 机器人在仿真器中出现无法预料的错误。因此增加了不带灵巧手版本的 `.urdf` 文件，并配置了对应的 `.proto` 节点以及 `.wbt` 世界文件，并为新的版本设计了 `UnitreeH1StandingV1` 接口。
+- [2024/07/24] 使用 `UnitreeH1StandingV1` 和 `v1` 训练机器人，发现并不理想，浏览了相关论文，认为需要扩充状态空间 + 并行轨迹采样，这是接下来的目标。
 
 ## 1. Markov Decision Process
 
@@ -65,14 +66,27 @@
 代码来源: [我自己 2023 年写的](https://github.com/JinbiaoZhu/BasicReinforcementLearning.git) .
 
 > 注意: 接下来的效果展示可能有误！目前正在调整。
+> 
+> 注意: 接下来的效果展示可能有误！目前正在调整。
+> 
+> 注意: 接下来的效果展示可能有误！目前正在调整。
 
-效果表现和损失函数展示:
+效果表现和损失函数展示 ( `UnitreeH1StandingV0` 和 `v0` 奖励函数) :
 
 ![Total Reward Per Episode](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/results/ppo/UnitreeH1_Standing-20240722122807.png?raw=true)
 
 ![Loss function Per Episode](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/results/ppo/UnitreeH1_Standing-20240722104334.png-loss.png?raw=true)
 
 ![GIF file](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/record/ppo/actor_20240722134709.gif?raw=true)
+
+效果表现和损失函数展示 ( `UnitreeH1StandingV1` 和 `v1` 奖励函数) :
+
+![Total Reward Per Episode](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/results/ppo/UnitreeH1_Standing-20240724170525.png?raw=true)
+
+![Loss function Per Episode](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/results/ppo/UnitreeH1_Standing-20240724170525.png-loss.png?raw=true)
+
+![GIF file](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/record/ppo/actor_20240724170556.gif?raw=true)
+
 
 ### PlaNet
 

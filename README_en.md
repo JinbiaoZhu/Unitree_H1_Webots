@@ -11,6 +11,7 @@ This project uses reinforcement learning (PPO) to train the **Unitree H1** human
 - **[2024/07/21]** Completed initial modeling and coding.
 - **[2024/07/22]** Adjusted the `v1` version reward function.
 - **[2024/07/23]** Discovered that the `.urdf` file used included the dexterous hand version, causing unexpected errors in the simulator due to the complexity of the parts. Added a version of the `.urdf` file **without the dexterous hand**, configured the corresponding `.proto` node and `.wbt` world file, and designed the `UnitreeH1StandingV1` interface for the new version.
+- **[2024/07/24]** Using `UnitreeH1StandingV1` and `v1` reward function to train the robot was found to be suboptimal. After reviewing relevant papers, it was concluded that expanding the observation space and implementing parallel trajectory sampling are necessary steps for improvement. This will be the next goal.
 
 ## 1. Markov Decision Process
 
@@ -68,14 +69,26 @@ To determine if an episode has ended for automatic data collection in reinforcem
 Source: [Written by myself in 2023](https://github.com/JinbiaoZhu/BasicReinforcementLearning.git) .
 
 > **Note:** The following performance display might contain errors and is currently being adjusted.
+> 
+> **Note:** The following performance display might contain errors and is currently being adjusted.
+> 
+> **Note:** The following performance display might contain errors and is currently being adjusted.
 
-Performance and loss values are displayed below:
+Performance and loss values are displayed below ( `UnitreeH1StandingV0` + `v0` reward function) :
 
 ![Total Reward Per Episode](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/results/ppo/UnitreeH1_Standing-20240722122807.png?raw=true)
 
 ![Loss function Per Episode](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/results/ppo/UnitreeH1_Standing-20240722104334.png-loss.png?raw=true)
 
 ![GIF file](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/record/ppo/actor_20240722134709.gif?raw=true)
+
+Performance and loss values are displayed below ( `UnitreeH1StandingV1` and `v1` reward function) :
+
+![Total Reward Per Episode](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/results/ppo/UnitreeH1_Standing-20240724170525.png?raw=true)
+
+![Loss function Per Episode](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/results/ppo/UnitreeH1_Standing-20240724170525.png-loss.png?raw=true)
+
+![GIF file](https://github.com/JinbiaoZhu/Unitree_H1_Webots/blob/main/controllers/record/ppo/actor_20240724170556.gif?raw=true)
 
 ### PlaNet
 
