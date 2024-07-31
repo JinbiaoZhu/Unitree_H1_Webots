@@ -88,3 +88,4 @@ class ContinuousPolicyDeterministic(BaseNet):
         x = torch.tanh(self.p3(x))
         x = x * self.max_action
         return x
+

@@ -12,6 +12,7 @@ This project uses reinforcement learning (PPO) to train the **Unitree H1** human
 - **[2024/07/22]** Adjusted the `v1` version reward function.
 - **[2024/07/23]** Discovered that the `.urdf` file used included the dexterous hand version, causing unexpected errors in the simulator due to the complexity of the parts. Added a version of the `.urdf` file **without the dexterous hand**, configured the corresponding `.proto` node and `.wbt` world file, and designed the `UnitreeH1StandingV1` interface for the new version.
 - **[2024/07/24]** Using `UnitreeH1StandingV1` and `v1` reward function to train the robot was found to be suboptimal. After reviewing relevant papers, it was concluded that expanding the observation space and implementing parallel trajectory sampling are necessary steps for improvement. This will be the next goal.
+- **[2024/07/31]** It was found that the state space based solely on **joint angles** and **the 3D position of the head** is not a "complete" state space, but rather suitable as a **partially observable observation space**. Therefore, the next improvement involves implementing algorithms under the assumption of Partially Observable Markov Decision Processes (POMDP).
 
 ## 1. Markov Decision Process
 

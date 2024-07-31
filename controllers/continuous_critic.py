@@ -1,5 +1,5 @@
 """
-Continuous critics, used for DDPG, .
+Continuous critics, used for DDPG, PPO.
 """
 import torch.nn as nn
 
@@ -10,7 +10,6 @@ class ContinuousCritic(BaseNet):
     """
     Q(s,a)
     """
-
     def __init__(self, state_dim, action_dim, max_action, hidden_dim=256, activate="relu"):
         super(ContinuousCritic, self).__init__()
         self.state_dim = state_dim

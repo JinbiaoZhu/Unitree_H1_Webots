@@ -1,20 +1,15 @@
 """
 PPO algorithm.
 """
-import copy
-
-import numpy as np
 import torch.optim
 import torch.nn.functional as F
 from torch.distributions.normal import Normal
-from torch.distributions.kl import kl_divergence
-from torch.nn.utils.convert_parameters import parameters_to_vector, vector_to_parameters
 
 from base_declaration import DEVICE, DTYPE, EPS, LINEAR
 from buffer import Episode
 from continuous_policy import ContinuousPolicyNormal
 from continuous_critic import ContinuousValueCritic
-from tools import init_weight, discounted_rewards, time_string
+from tools import init_weight, time_string
 
 
 class PPO:
