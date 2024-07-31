@@ -303,10 +303,10 @@ class UnitreeH1StandingV1(gymnasium.Env):
     """
     # 这个元数据字典用于存储类内全局和仿真器连接的超参数
     metadata = {
-        "episode_length": 100,
+        "episode_length": 50,
         "p": 1,
         "timestep": 1,
-        "threshold": math.pi * 2 / 100,
+        "threshold": math.pi * 2 / 50,
         "fly": 3.0,
         "mode": "train"
     }

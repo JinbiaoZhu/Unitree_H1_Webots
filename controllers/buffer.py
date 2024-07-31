@@ -90,14 +90,13 @@ class SequenceReplayBuffer:
     """
     A replay buffer with sequential episodes.
     """
-
     def __init__(self, maxlen, batchsize, requires_dists=True):
         self._maxlen = maxlen
         self._batchsize = batchsize
         self._requires_dists = requires_dists
-
+        # collecting all episodes
         self.buffer = collections.deque(maxlen=self._maxlen)
-
+        # collecting an episode
         self.episode_buffer = Episode(self._requires_dists)
 
     def add_to_episode(self, state, action, reward, next_state, done, dist):
