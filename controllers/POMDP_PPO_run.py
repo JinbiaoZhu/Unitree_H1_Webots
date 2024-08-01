@@ -58,12 +58,14 @@ if __name__ == '__main__':
 
                 with torch.no_grad():
                     state = env.reset()
+                    hidden_state = None
 
                     while env.render() != -1:
-                        action, dist = agent.action(state)
+                        action, new_hidden_state = agent.action(state, hidden_state)
                         next_state, reward, done, info = env.step(action)
-                        agent.store(state, action, reward, next_state, done, dist)
+                        agent.store(state, action, reward, next_state, done, new_hidden_state)
                         state = np.asarray(next_state)
+                        hidden_state = new_hidden_state
                         evaluation.add_single_step_reward(reward)
 
                         if done:

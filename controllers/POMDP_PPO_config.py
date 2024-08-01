@@ -13,7 +13,7 @@ pomdp_ppo_config = {
     "lmbda": 0.9,
     "hidden_dim": 128,
     "recurrent_layers": 2,
-    "epoch": 1,
+    "epoch": 2,
     "epsilon": 0.2,
     "is_trainable_std_dev": True,
     "init_log_std_dev": 0.0,

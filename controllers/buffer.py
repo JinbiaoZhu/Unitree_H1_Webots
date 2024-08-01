@@ -51,14 +51,14 @@ class Episode:
 
     def obtain_dict(self):
         if not self._requires_goal:
-            states, actions, rewards, next_states, dones, dists = zip(*self.episode_buffer)
+            states, actions, rewards, next_states, dones, others = zip(*self.episode_buffer)
             a_dict = {"state": np.asarray(states),
                       "action": np.asarray(actions),
                       "reward": np.asarray(rewards),
                       "next_state": np.asarray(next_states),
                       "done": np.asarray(dones), }
             if self._requires_distribution:
-                a_dict["dist"] = dists
+                a_dict["others"] = others
         else:
             obs, actions, rewards, next_obs, dones, dists, g, ag = zip(*self.episode_buffer)
             a_dict = {"state": obs,

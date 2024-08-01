@@ -81,17 +81,16 @@ class ContinuousValueCriticLSTM(nn.Module):
         self.hidden_cell = None
 
     def get_init_state(self, batch_size):
-        self.hidden_cell = (torch.zeros(self.recurrent_layers, batch_size, self.hidden_size).to(self.device),
-                            torch.zeros(self.recurrent_layers, batch_size, self.hidden_size).to(self.device))
+        return (torch.zeros(self.recurrent_layers, batch_size, self.hidden_size).to(self.device),
+                torch.zeros(self.recurrent_layers, batch_size, self.hidden_size).to(self.device))
 
-    def forward(self, state):
+    def forward(self, state, hidden_state):
         batch_size = state.shape[1]
-        if self.hidden_cell is None or batch_size != self.hidden_cell[0].shape[1]:
-            self.get_init_state(batch_size)
+        if hidden_state is None or batch_size != hidden_state[0].shape[1]:
+            hidden_state = self.get_init_state(batch_size)
 
-        self.hidden_cell = [value for value in self.hidden_cell]
-        _, self.hidden_cell = self.layer_lstm(state, self.hidden_cell)
-        hidden_out = F.elu(self.layer_hidden(self.hidden_cell[0][-1]))
+        _, new_hidden_state = self.layer_lstm(state, hidden_state)
+        hidden_out = F.elu(self.layer_hidden(new_hidden_state[0][-1]))
         value_out = self.layer_value(hidden_out)
         return value_out
 

@@ -111,24 +111,32 @@ class ContinuousPolicyNormalLSTM(nn.Module):
         self.hidden_cell = None
 
     def get_init_state(self, batch_size):
-        self.hidden_cell = (torch.zeros(self.recurrent_layers, batch_size, self.hidden_size).to(self.device),
-                            torch.zeros(self.recurrent_layers, batch_size, self.hidden_size).to(self.device))
+        return (torch.zeros(self.recurrent_layers, batch_size, self.hidden_size).to(self.device),
+                torch.zeros(self.recurrent_layers, batch_size, self.hidden_size).to(self.device))
 
-    def forward(self, state):
+    def forward(self, state, hidden_state):
+        """
+
+        :param state: (seq_len, batch_size, state_dim)
+        :param hidden_state: Tuple(Tensor(recurrent_layers, batch_size, hidden_dim),
+                                   Tensor(recurrent_layers, batch_size, hidden_dim))
+        :return:
+        """
         batch_size = state.shape[1]
         device = state.device
-        if self.hidden_cell is None or batch_size != self.hidden_cell[0].shape[1]:
-            self.get_init_state(batch_size)
-        self.hidden_cell = [value for value in self.hidden_cell]
-        _, self.hidden_cell = self.lstm(state, self.hidden_cell)
-        hidden_out = F.elu(self.layer_hidden(self.hidden_cell[0][-1]))
+
+        if hidden_state is None or batch_size != hidden_state[0].shape[1]:
+            hidden_state = self.get_init_state(batch_size)
+
+        lstm_out, new_hidden_state = self.lstm(state, hidden_state)
+        hidden_out = F.elu(self.layer_hidden(new_hidden_state[0][-1]))
         policy_logits_out = self.layer_policy_logits(hidden_out)
         cov_matrix = self.covariance_eye.to(device).expand(batch_size, self.action_dim,
                                                            self.action_dim) * torch.exp(self.log_std_dev.to(device))
         # We define the distribution on CPU since otherwise operations fail with CUDA illegal memory access error.
         policy_dist = torch.distributions.multivariate_normal.MultivariateNormal(policy_logits_out.to("cpu"),
                                                                                  cov_matrix.to("cpu"))
-        return policy_dist, policy_logits_out, cov_matrix
+        return policy_dist, policy_logits_out, cov_matrix, new_hidden_state
 
 
 if __name__ == "__main__":
@@ -139,13 +147,16 @@ if __name__ == "__main__":
                                              dtype=torch.float32, device="cuda:0")
 
     state_1 = torch.rand(100, 1, 21).to(device="cuda:0")
-    output = lstm_policy(state_1)
+    hidden_state_1 = (torch.rand(2, 1, 324).to(device="cuda:0"), torch.rand(2, 1, 324).to(device="cuda:0"))
+    output = lstm_policy(state_1, hidden_state_1)
     print(output)
 
     state_2 = torch.rand(50, 1, 21).to(device="cuda:0")
-    output = lstm_policy(state_2)
+    hidden_state_2 = (torch.rand(2, 1, 324).to(device="cuda:0"), torch.rand(2, 1, 324).to(device="cuda:0"))
+    output = lstm_policy(state_2, hidden_state_2)
     print(output)
 
     state_3 = torch.rand(1, 64, 21).to(device="cuda:0")
-    output = lstm_policy(state_3)
-    print(output)
+    hidden_state_3 = (torch.rand(2, 64, 324).to(device="cuda:0"), torch.rand(2, 64, 324).to(device="cuda:0"))
+    output = lstm_policy(state_3, hidden_state_3)
+    print(output[3][0].shape)
